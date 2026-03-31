@@ -1,4 +1,4 @@
-package ejedev.raidshamer;
+package mylesadams.deathshamer;
 
 import java.io.*;
 import java.net.HttpURLConnection;
