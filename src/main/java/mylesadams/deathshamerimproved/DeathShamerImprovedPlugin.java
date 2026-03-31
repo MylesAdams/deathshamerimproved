@@ -1,6 +1,7 @@
 package mylesadams.deathshamerimproved;
 import com.google.inject.Provides;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.api.events.VarbitChanged;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
+@Slf4j
 @PluginDescriptor(
         name = "Death Shamer Improved",
         configName = "deathShamerImproved",
@@ -67,7 +69,7 @@ public class DeathShamerImprovedPlugin extends Plugin {
                 takeScreenshot("Death of " + player.getName(), "Wall of Shame");
             }
             else {
-                System.out.println("[DEBUG] Not in shameable zone sorry.");
+                log.debug("Not in shameable zone sorry.");
             }
         }
     }
