@@ -1,4 +1,4 @@
-package ejedev.raidshamer;
+package mylesadams.deathshamerimproved;
 import com.google.inject.Provides;
 import lombok.Getter;
 import net.runelite.api.*;
@@ -11,27 +11,25 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
-import javax.print.attribute.standard.MediaSize;
 
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.ImageCapture;
-import net.runelite.client.util.ImageUploadStyle;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
 @PluginDescriptor(
-        name = "Death Shamer",
-        configName = "RaidShamerPlugin", // Plugin was renamed from raidshamer
-        description = "Takes a screenshot of deaths during bosses and raids. Supports discord webhook integration.",
+        name = "Death Shamer Improved",
+        configName = "deathShamerImproved",
+        description = "Takes a screenshot of deaths during bosses, raids, or out in the world. Supports discord webhook integration.",
         tags = {"death", "raid", "raids", "shame", "tob", "theater", "cox", "chambers", "toa", "tombs", "discord", "webhook"}
 )
-public class RaidShamerPlugin extends Plugin {
+public class DeathShamerImprovedPlugin extends Plugin {
 
     @Inject
     private Client client;
@@ -46,15 +44,15 @@ public class RaidShamerPlugin extends Plugin {
     private ScheduledExecutorService executor;
 
     @Inject
-    private RaidShamerConfig config;
+    private DeathShamerImprovedConfig config;
 
     @Getter
     private boolean inTob;
 
     @Provides
-    RaidShamerConfig provideConfig(ConfigManager configManager)
+    DeathShamerImprovedConfig provideConfig(ConfigManager configManager)
     {
-        return configManager.getConfig(RaidShamerConfig.class);
+        return configManager.getConfig(DeathShamerImprovedConfig.class);
     }
 
     @Subscribe
@@ -76,8 +74,8 @@ public class RaidShamerPlugin extends Plugin {
 
     private boolean shouldTakeScreenshot(Player player) {
         boolean isPlayerValidTarget = (config.captureOwnDeaths() && player == client.getLocalPlayer()) ||
-                (config.otherPlayersDeaths() == RaidShamerConfig.OtherPlayers.ALL) ||
-                (config.otherPlayersDeaths() == RaidShamerConfig.OtherPlayers.FRIENDS && player.isFriend());
+                (config.otherPlayersDeaths() == DeathShamerImprovedConfig.OtherPlayers.ALL) ||
+                (config.otherPlayersDeaths() == DeathShamerImprovedConfig.OtherPlayers.FRIENDS && player.isFriend());
 
         boolean inRaid = client.getVarbitValue(Varbits.IN_RAID) > 0;
         Widget toaWidget = client.getWidget(ComponentID.TOA_RAID_LAYER);

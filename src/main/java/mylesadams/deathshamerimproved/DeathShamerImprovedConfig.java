@@ -1,13 +1,12 @@
-package ejedev.raidshamer;
+package mylesadams.deathshamerimproved;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
 
-//plugin was renamed from raidshamer - keeping legacy config group name to avoid duplicate plugin entries
-@ConfigGroup("raidshamer")
-public interface RaidShamerConfig extends Config
+@ConfigGroup("deathShamerImproved")
+public interface DeathShamerImprovedConfig extends Config
 {
     enum OtherPlayers
     {
@@ -30,7 +29,7 @@ public interface RaidShamerConfig extends Config
     @ConfigItem(
         keyName = "otherPlayersDeaths",
         name = "Other Players Shamed",
-        description = "Allows you to change which other players should also be shamed.",
+        description = "Allows you to filter which other players should be shamed.",
         position = 2
     )
     default OtherPlayers otherPlayersDeaths()
