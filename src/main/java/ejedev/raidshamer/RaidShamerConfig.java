@@ -9,6 +9,12 @@ import net.runelite.client.config.ConfigItem;
 @ConfigGroup("raidshamer")
 public interface RaidShamerConfig extends Config
 {
+    enum OtherPlayers
+    {
+        NONE,
+        FRIENDS,
+        ALL
+    }
 
     @ConfigItem(
         keyName = "captureOwnDeaths",
@@ -22,14 +28,14 @@ public interface RaidShamerConfig extends Config
     }
 
     @ConfigItem(
-        keyName = "captureFriendDeathsOnly",
-        name = "Friends' deaths only",
-        description = "Allows you to toggle whether death shaming is limited to just your friends list",
+        keyName = "otherPlayersDeaths",
+        name = "Other Players Shamed",
+        description = "Allows you to change which other players should also be shamed.",
         position = 2
     )
-    default boolean captureFriendDeathsOnly()
+    default OtherPlayers otherPlayersDeaths()
     {
-        return false;
+        return OtherPlayers.NONE;
     }
 
     @ConfigItem(

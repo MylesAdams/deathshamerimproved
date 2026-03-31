@@ -37,13 +37,11 @@ public class DiscordWebhook {
         String o = "Content-Disposition: form-data; name=\""
                 + URLEncoder.encode(name,"UTF-8") + "\"\r\n\r\n";
         out.write(o.getBytes(StandardCharsets.UTF_8));
-        out.write(URLEncoder.encode(field,"UTF-8").getBytes(StandardCharsets.UTF_8));
+        out.write(field.getBytes(StandardCharsets.UTF_8));
         out.write("\r\n".getBytes(StandardCharsets.UTF_8));
     }
 
     public void SendWebhook(ByteArrayOutputStream screenshotOutput, String fileName, String discordUrl) throws IOException {
-        fileName += (fileName.isEmpty() ? "" : " ") + format(new Date());
-        fileName = fileName.replace('+', ' ');
         URL url = new URL(discordUrl);
         URLConnection con = url.openConnection();
         HttpURLConnection http = (HttpURLConnection)con;

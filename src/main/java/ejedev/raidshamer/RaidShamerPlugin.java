@@ -11,6 +11,8 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import javax.print.attribute.standard.MediaSize;
+
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.util.ImageCapture;
@@ -74,8 +76,8 @@ public class RaidShamerPlugin extends Plugin {
 
     private boolean shouldTakeScreenshot(Player player) {
         boolean isPlayerValidTarget = (config.captureOwnDeaths() && player == client.getLocalPlayer()) ||
-                (player.isFriend()) ||
-                (!config.captureFriendDeathsOnly() && !player.isFriend()) && player != client.getLocalPlayer();
+                (config.otherPlayersDeaths() == RaidShamerConfig.OtherPlayers.ALL) ||
+                (config.otherPlayersDeaths() == RaidShamerConfig.OtherPlayers.FRIENDS && player.isFriend());
 
         boolean inRaid = client.getVarbitValue(Varbits.IN_RAID) > 0;
         Widget toaWidget = client.getWidget(ComponentID.TOA_RAID_LAYER);
